@@ -40,3 +40,4 @@ pkg
 #
 # For vim:
 #*.swp
+/example/micah_resume.rb
