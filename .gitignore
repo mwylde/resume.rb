@@ -41,3 +41,4 @@ pkg
 # For vim:
 #*.swp
 /Gemfile.lock
+/lib/resume/latex_flymake.rb
