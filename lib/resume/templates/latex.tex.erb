@@ -4,7 +4,7 @@
 %% http://www.iro.umontreal.ca/~csuros/latex.html %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass{resume}
+\documentclass{<%= @resume_class %>}
 
 \renewcommand{\categoryfont}{\sc}
 
@@ -21,12 +21,12 @@
 % would be nicer to put in the class file...
 %
 \addtolength{\marginparwidth}{-\marginparsep}
- \setlength{\evensidemargin}{\oddsidemargin}
- \setlength{\textwidth}{\paperwidth}
- \addtolength{\textwidth}{-2in}
- \addtolength{\textwidth}{-2\oddsidemargin}
- \addtolength{\textwidth}{\marginparwidth}
- \addtolength{\textwidth}{\marginparsep}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2in}
+\addtolength{\textwidth}{-2\oddsidemargin}
+\addtolength{\textwidth}{\marginparwidth}
+\addtolength{\textwidth}{\marginparsep}
 %
 %
 \setlength{\topmargin}{-0.5in}
@@ -44,85 +44,44 @@
 \address{<%= @about[:address].join('\\ ' + "\n") %> \\
 	<%= @about[:phone] %> \\
 	}{
-        \mbox{\small\tt <%= @about[:email] %> }\\
-	\mbox{\small\tt <%= @about[:url] %>}
+        <%= @about[:email] %> \\
+	<%= @about[:url] %>}
 
 \begin{document}
 \maketitle
 
 % ------- Education ---------------------------------------------------
-
+    
 \begin{category}{Education}
-  <% @education.each do |ed| %>
-    \citem{<%= ed[:school] %>}, <%= ed[:city] %>\\
-    <%= ed.degree %>, 
-    <%= ed[:will_finish] ? "expected graduation: #{ed[:will_finish]}" : ed[:finished] %>\\
-\end{category}
-
-% ------- Skills ------------------------------------------------------
-
-\begin{category}{Skills}
-\citembullet C, FORTRAN, HTML, Lisp/Scheme, CA-Clipper/DBASE, 
-	Intel x86, Pascal
-\citembullet perl, csh, Tcl/Tk, awk
-\citembullet CDE, AIX, Unix, MS-DOS, MS-Windows, OpenWindows, CTOS, VMS, 
-	Novell
-\citembullet Fluent spoken/written English, French, German, and Hungarian; fair Spanish,
-Polish
+  <% @schools.each do |ed| %>
+    \citem{<%= ed[:school] %>}, <%= ed[:city] %>
+    <% if ed[:degree] %>\\<%= ed[:degree] %>,<% end %> 
+    <%= ed[:will_finish] ? "expected graduation: #{ed[:will_finish]}" : ed[:finished] %>
+  <% end %>
 \end{category}
 
 % -------- Work experience --------------------------------------------
 
 \begin{category}{Work \\experience}
-\citem{Teaching Assistant}, Yale University (January 1995 -- present)\\ 
-Courses: Theoretical Methods in Computer Science, Algorithms, 
-Introduction to Computer Science, Cryptography and Network Security, 
-Theory of Dictributed Systems
-\citem{Programmer}, Department of Bioinformatics, 
-CuraGen Corp., Branford, CT\\ (Summer 1996)
-\begin{itemize} 
-\item Designed and implemented optimizing peak fitting program 
-to process electrophoresis data.
-\item Designed and implemented multiple band matching algorithm 
-to compare gene expression levels.
-\item Wrote Prolog-Oracle interface in C/Pro*C to increase the speed of
-gene data analysis.
-\end{itemize}
 
-\citem{Technical Writer}, Sysland Ltd., 
-a partner of UNISYS Corp., Hungary (October 1993 -- June 1994)\\
-Designed and co-authored textbook and course materials for OTP Bank 
---- the largest Hungarian bank ---
-(materials used in the instruction of all the tellers on the
-software/hardware solution delivered by Unisys).
-\citem{Internship}, Zaragoza University, Spain (Summer 1993)
-\begin{itemize}
-\item Installed and maintained Oracle in IBM PC environment.
-\item Designed SQL exercises for database course.
-\end{itemize}
-
-\citem{Research Assistant}, Department of Mathematics and Computer Science,\\
-{\TUB} (Summer 1992)\\
-Assisted in the writing of a textbook on statistical pattern recognition.\\
-{\em(L. Devroye, L. Gy\"orfi, G. Lugosi: Probabilistic Theory of Pattern
-Recognition, Springer-Verlag NY, 1996.)}
-
-\citem{Freelance programmer} (1990 -- 1994)\\ 
-Designed and developed CA-Clipper 
-programs for complex database management tasks. The clients were
-usually small/medium-size businesses ranging from retail stores to nationwide
-distributors of medical products.
-
-\citem{Translator}, T\'oth Translation Agency, Budapest, Hungary 
-(1992 -- 1995)\\
-Translated technical texts mostly in the field of Electrical Engineering from 
-English or German into Hungarian and from Hungarian into English.
+  <% @jobs.each do |job| %>
+     \citem{<%= job[:position] %>}, <%= job[:employer] %> (<%= job[:date] %>)\\
+        <%= job[:description] %>
+  <% end %>
 \end{category}
 
-% -------- Reference --------------------------------------------
+% ------- Custom Sections  --------------------------------------------
 
-\begin{category}{Reference} 
-\citemnobullet Available on request.
-\end{category}
+<% @sections.each do |s| %>
+  \begin{category}{<%= s[:name] %>}
+     <% if s[:text] %>
+            \citemnobullet <%= s[:text] %>
+     <% end %>
+     <% if s[:bullets] %>
+       <%= s[:bullets].map{|b| '\citembullet ' + b}.join("\n") %>
+     <% end %>
+                   
+  \end{category}
+<% end %>
 
 \end{document}

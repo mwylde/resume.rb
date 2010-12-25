@@ -1,3 +1,9 @@
+libdir = File.dirname(__FILE__)
+$LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
+
+require 'erubis'
+require 'resume/latex'
+
 # Ruby class that lets you define resumes that can be rendered
 # to various backends. Currently planned is Markdown and LaTex,
 # which give HTML and PDF when compiled with their respective
@@ -5,71 +11,70 @@
 #
 module Resume
   class Resume
+    attr_reader :about, :schools, :jobs, :sections
+    # Starts a resume definition block
+    def initialize &block
+      rh = ResumeHandler.new
+      block.arity < 1 ? rh.instance_eval(&block) : block.call(rh)
+      @about = rh.about
+      @schools = rh.schools
+      @jobs = rh.jobs
+      @sections = rh.sections
+    end
+
+    private
     # @private
     class ResumeHandler      
-      attr_reader :about
-      attr_reader :education
-      attr_reader :jobs
-      attr_reader :sections
+      attr_reader :about, :schools, :jobs, :sections
+
       def initialize
         @about = {}
-        @education = []
+        @schools = []
         @jobs = []
         @sections = []
 
         [:name, :email, :address, :url, :phone].each do |field|
-          define_method field do |value, *options|
-            @about[field] = { :value => value, :options => options }
+          self.class.class_eval do
+            define_method field do |value|
+              @about[field] = value
+            end
           end
         end
       end
 
       def education &block
-        sh = SubHandler.new [:school, :finished, :degree, :gpa, :major_gpa, :city]
+        sh = sub_handler [:school, :finished, :will_finish, :degree, :city]
         block.arity < 1 ? sh.instance_eval(&block) : block.call(sh)
-        @education << sh.data
+        @schools << sh.data
       end
 
-      def jobs &block
-        sh = SubHandler.new [:position, :employer, :city, :data, :description]
+      def job &block
+        sh = sub_handler [:position, :employer, :city, :date, :description]
         block.arity < 1 ? sh.instance_eval(&block) : block.call(sh)
         @jobs << sh.data
       end
 
-      def sections &block
-        sh = SubHandler.new [:name, :text, :bullets]
+      def section &block
+        sh = sub_handler [:name, :text, :bullets]
         block.arity < 1 ? sh.instance_eval(&block) : block.call(sh)
         @sections << sh.data
       end
-    end
 
-    # @private
-    def SubHandler
-      attr_reader :data
-      def initialize fields
-        @data = {}
-        fields.each do |field|
-          define_method field do |value, *options|
-            @data[field] = { :value => value, :options => options }
+      private
+      # @private
+      def sub_handler fields
+        s = Class.new
+        s.class_eval do
+          attr_reader :data
+          def initialize; @data = {}; end
+          fields.each do |field|
+            define_method field do |value|
+              @data[field] = value
+            end
           end
         end
-      end
-
-      def method_missing name, args
-        @data[name] = {:value => args[0], :options => args[1]}
+        s.new
       end
     end
-
-    # Starts a resume definition block
-    def define &block
-      rh = ResumeHandler.new
-      block.arity < 1 ? rh.instance_eval(&block) : block.call(rh)
-      @about = rh.about
-      @education = rh.education
-      @jobs = rh.jobs
-      @sections = rh.sections
-    end
-
-    
   end
 end
