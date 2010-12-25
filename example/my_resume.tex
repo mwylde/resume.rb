@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Document template and style file created by    %%
+%% Miklos Csuros. More information here:          %%
+%% http://www.iro.umontreal.ca/~csuros/latex.html %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{/Users/mwylde/.rvm/gems/ruby-1.9.2-p0/gems/resume-0.1.0/lib/resume/templates/resume}
+
+\renewcommand{\categoryfont}{\sc}
+
+%
+% set the space used for category titles here:
+% use the same value for oddsidemargin and marginparwidth [the latter 
+% 		will be reset to account for marginparsep]
+% 
+\setlength{\oddsidemargin}{1in}
+\setlength{\marginparwidth}{1in}
+% 
+% calculate other dimensions [textwidth and evensidemargin] 
+% in function of oddsidemargin and marginparwidth: 
+% would be nicer to put in the class file...
+%
+\addtolength{\marginparwidth}{-\marginparsep}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2in}
+\addtolength{\textwidth}{-2\oddsidemargin}
+\addtolength{\textwidth}{\marginparwidth}
+\addtolength{\textwidth}{\marginparsep}
+%
+%
+\setlength{\topmargin}{-0.5in}
+%
+%
+\renewcommand{\labelcitem}{$\diamond$}
+\renewcommand{\labelitemi}{$\cdot$}
+\newcommand{\first}{$1^{\mbox{\scriptsize st}}$\ }
+\newcommand{\second}{$2^{\mbox{\scriptsize nd}}$\ }
+\newcommand{\third}{$3^{\mbox{\scriptsize rd}}$\ }
+
+\author{Micah Wylde}
+% ------ Address --------------------------------------------------------
+
+\address{Wesleyan University\\ 
+45 Wyllys Ave. \#93026\\ 
+Middletown, CT 06459 \\
+	(xxx) xxx-xxxx \\
+	}{
+        mwylde@wesleyan.edu \\
+	http://micahw.com/}
+
+\begin{document}
+\maketitle
+
+% ------- Education ---------------------------------------------------
+    
+\begin{category}{Education}
+    \citem{Wesleyan University}, Middletown, CT
+    \\B.A. in Computer Science, 
+    expected graduation: May 2012
+    \citem{Georgiana Bruce Kirby}, Santa Cruz, CA
+     
+    June 2008
+\end{category}
+
+% -------- Work experience --------------------------------------------
+
+\begin{category}{Work \\experience}
+
+     \citem{Researcher}, Washington University CS Dept. REU (Summer 2010)\\
+        Designed and evaluated real-time scheduling algorithms for utility-aware non-preemtable, stochastic task sets using machine learning techniques in C++. Worked under Dr. Chris Gill.
+     \citem{Programming manager}, Instructional Media Services, Wesleyan University (2008-present)\\
+        Maintained classroom multimedia technology and academic computing labs. Programmed and designed AMX-based integrated controllers and touch panels. Implemented a touchscreen-based classroomcontrol system in ruby and javascript.
+     \citem{Crew Chief}, Center for the Arts, Wesleyan University (2008-present)\\
+        Live mixing for shows in Wesleyan's Crowell Concert and World Music halls. Managed other student sound techs.
+     \citem{Researcher}, Space Science, NASA Ames Research Center (Summer 2007)\\
+        Created theoretical models for interference, noise and compression artifacts in Cassini CIRS (Composite Infrared Spectrometer) data, and wrote software to try to eliminate them, using IDL. Worked under Dr. Jeffrey Cuzzi of NASA Ames.
+     \citem{Web Developer}, Georgiana Bruce Kirby Preparatory School (2007-2008)\\
+        Redesigned the school’s website using CSS and XHTML, built on a heavily-modified RubyOnRails content management system, with an administrative side designed such that non-proficient computer users could maintain and update the site. Additionally, integrated with the Schoolweb student portal.
+\end{category}
+
+% ------- Custom Sections  --------------------------------------------
+
+  \begin{category}{Skills}
+       \citembullet Ruby, Javascript, Haskell, Lisp, C, C++, Python, Java, PHP, \LaTeX
+\citembullet Linux, OS X, Windows
+                   
+  \end{category}
+  \begin{category}{Research}
+       \citembullet AI, crowd simulation, robot navigation, machine learning, real-time scheduling.
+                   
+  \end{category}
+  \begin{category}{Software Projects}
+       \citembullet Roomtrol (Ruby, Javascript, HTML5): classroom automation and control system with a ruby backend and HTML5 touchscreen interface built with Sproutcore and Node.js. Allows professors to control all multi-media equipment easily, while improving remote support and monitoring. Currently in use at Wesleyan University.
+\citembullet Schoolweb (Ruby, Javascript, XHTML, SQL): RubyOnRails based portal designed to ease communication be- tween students, faculty, and parents at high schools. Features include user customizable “widgets” which can have polls, html, file uploads, or information about sports teams or theater produ
+ctions and a calendar customized to users’ clubs, courses, and grade. Integrates with school’s grading system, to allow for quick access to students’ grades. Allows for teachers to input homework for viewing by students and parents. In use at Georgiana Bruce Kirby from 2007 to the present.
+                   
+  \end{category}
+
+\end{document}
