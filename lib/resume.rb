@@ -3,6 +3,7 @@ $LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
 
 require 'erubis'
 require 'resume/latex'
+require 'resume/plain_text'
 
 # Ruby class that lets you define resumes that can be rendered
 # to various backends. Currently planned is Markdown and LaTex,

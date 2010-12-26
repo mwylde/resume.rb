@@ -1,11 +1,9 @@
-require 'ostruct'
-
 module Resume  
   class LatexBackend
     class << self
       ESCAPING_RULES = {
         "&" => '\&',
-#        "TeX" => '\TeX',
+#       "TeX" => '\TeX',
         "LaTeX" => '\LaTeX',
         "$" => '\textdollar',
         "#" => '\#',
