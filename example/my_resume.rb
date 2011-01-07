@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-require 'resume'
+require 'resumerb'
 require 'tempfile'
 require 'date'
 
