@@ -21,7 +21,7 @@ module Resume
 
         result << "## Work Experience" << RN << RN
         r.jobs.each do |job|
-          date = job[:date] ? "(#{job[:date]})" : ""
+          date = job[:date] ? " (#{job[:date]})" : ""
           result << "### " <<  job[:position] << ", "
           result << job[:employer] << date << RN << RN
           result << job[:description] << RN << RN
