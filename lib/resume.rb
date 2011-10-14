@@ -2,8 +2,11 @@ libdir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
 
 require 'erubis'
+require 'redcarpet'
 require 'resume/latex'
 require 'resume/plain_text'
+require 'resume/markdown'
+require 'resume/html'
 
 # Ruby class that lets you define resumes that can be rendered
 # to various backends. Currently planned is Markdown and LaTex,

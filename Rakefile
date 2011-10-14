@@ -16,12 +16,13 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/mwylde/resume.rb"
   gem.license = "MIT"
   gem.summary = %Q{Generates resumes in HTML and PDF (via LaTeX)}
-  gem.description = %Q{Resume provides a DSL for defining resume data, which can be rendered via various backends (LaTeX currently supported, with Markdown and HTML planned).}
-  gem.email = "mwylde@wesleyan.edu"
+  gem.description = %Q{Resume provides a DSL for defining resume data, which can be rendered via various backends (currently LaTeX, plain text, Markdown and HTML).}
+  gem.email = "micah@micahw.com"
   gem.authors = ["Micah Wylde"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   gem.add_runtime_dependency 'erubis', '> 2.6.5'
+  gem.add_runtime_dependency 'redcarpet', '~> 2.0.0b5'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
 Jeweler::RubygemsDotOrgTasks.new
