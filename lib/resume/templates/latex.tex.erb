@@ -42,7 +42,7 @@
 % ------ Address --------------------------------------------------------
 
 \address{<%= @about[:address].join("\\\\ \n") %> \\
-	<%= @about[:phone] %> \\
+	<%= @about[:phone] + "\\" if @about[:phone] %> 
 	}{
         <%= @about[:email] %> \\
 	<%= @about[:url] %>}

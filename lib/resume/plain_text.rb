@@ -9,9 +9,9 @@ module Resume
         result << r.about[:name].upcase << RN << RN
 
         # Adress
-        result << r.about[:address].join(RN) << RN
-        result << r.about[:email] << RN
-        result << r.about[:phone] << RN << RN
+        result << r.about[:address].join(RN) << RN if r.about[:address]
+        result << r.about[:email] << RN if r.about[:email]
+        result << r.about[:phone] << RN << RN if r.about[:phone]
 
         # Education
         result << "EDUCATION" << RN << RN
