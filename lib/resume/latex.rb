@@ -54,9 +54,9 @@ module Resume
       def escape s
         ESCAPING_RULES.each do |from, to|
           if s.is_a? Array
-            s.map{|x| x.gsub!(from, to)}
+            s = s.map{|x| x.gsub(from, to)}
           else
-            s.gsub!(from, to)
+            s = s.gsub(from, to)
           end
         end
         s
