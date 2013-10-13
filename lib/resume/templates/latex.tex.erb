@@ -41,11 +41,11 @@
 \author{<%= @about[:name] %>}
 % ------ Address --------------------------------------------------------
 
-\address{<%= @about[:address].join("\\\\ \n") %> \\
-	<%= @about[:phone] + "\\" if @about[:phone] %> 
-	}{
+\address{<%= @about[:address].join("\\\\ \n") + " \\\\" if @about[:address] %>
+  <%= @about[:phone] + "\\" if @about[:phone] %> 
+  }{
         <%= @about[:email] %> \\
-	<%= @about[:url] %>}
+  <%= @about[:url] %>}
 
 \begin{document}
 \maketitle
